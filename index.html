@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BarkHaven — Premium Dog Adoption & Canine Care Sanctuary</title>
+  <meta name="description" content="Discover healthy, vaccinated, loving rescue dogs looking for their forever homes. Interactive breed matching quiz, canine wellness guides, and verified adoption.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti for Adoption Celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <span><i data-lucide="sparkles" class="icon-sm"></i> Free health checkup & starter kit included with every adoption this month!</span>
+      <a href="#dogs-section" class="announcement-link">Explore Dogs <i data-lucide="arrow-right" class="icon-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="brand-logo">
+        <div class="logo-icon-wrap">
+          <i data-lucide="dog" class="brand-icon"></i>
+        </div>
+        <span class="brand-name">Bark<span>Haven</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu">
+        <a href="#dogs-section" class="nav-link active">Adopt a Dog</a>
+        <a href="#quiz-section" class="nav-link">Breed Matchmaker</a>
+        <a href="#care-section" class="nav-link">Care & Wellness</a>
+        <a href="#process-section" class="nav-link">How It Works</a>
+        <a href="#google-reviews-section" class="nav-link">Google Reviews</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Search Trigger Button -->
+        <button class="icon-btn" id="search-trigger-btn" title="Quick Search" aria-label="Search dogs">
+          <i data-lucide="search"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="icon-btn theme-toggle-btn" id="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <i data-lucide="moon" id="theme-icon"></i>
+        </button>
+
+        <!-- Saved / Favorites Button -->
+        <button class="icon-btn favorite-counter-btn" id="fav-drawer-trigger" title="Saved Dogs" aria-label="Saved dogs list">
+          <i data-lucide="heart"></i>
+          <span class="badge-count" id="fav-badge-count">0</span>
+        </button>
+
+        <a href="#dogs-section" class="btn btn-primary nav-cta">
+          <span>Find My Companion</span>
+          <i data-lucide="arrow-up-right" class="icon-sm"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <i data-lucide="menu" id="mobile-menu-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <section class="hero-section">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>Over 1,850+ Happy Adoptions & Counting</span>
+        </div>
+        <h1 class="hero-title" id="hero-typewriter-title">
+          <span class="typewriter-prefix">Find Your Forever </span>
+          <span class="gradient-text" id="typewriter-text"></span><span class="typewriter-cursor"></span>
+        </h1>
+        <p class="hero-subtitle">
+          Connect with thoroughly vetted, vaccinated, and loving rescue dogs. Every wagging tail has a story, and yours is waiting to begin.
+        </p>
+
+        <!-- Hero Quick Search Bar -->
+        <div class="hero-search-card" id="hero-search-card">
+          <div class="search-field">
+            <label for="hero-breed-select"><i data-lucide="tag" class="icon-xs"></i> Breed Preference</label>
+            <select id="hero-breed-select">
+              <option value="all">All Breeds</option>
+              <option value="Golden Retriever">Golden Retriever</option>
+              <option value="French Bulldog">French Bulldog</option>
+              <option value="Siberian Husky">Siberian Husky</option>
+              <option value="Australian Shepherd">Australian Shepherd</option>
+              <option value="Pembroke Welsh Corgi">Welsh Corgi</option>
+              <option value="German Shepherd">German Shepherd</option>
+              <option value="Beagle">Beagle</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-field">
+            <label for="hero-size-select"><i data-lucide="maximize-2" class="icon-xs"></i> Size Category</label>
+            <select id="hero-size-select">
+              <option value="all">Any Size</option>
+              <option value="Small">Small (&lt; 25 lbs)</option>
+              <option value="Medium">Medium (25 - 60 lbs)</option>
+              <option value="Large">Large (60+ lbs)</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-field">
+            <label for="hero-age-select"><i data-lucide="calendar" class="icon-xs"></i> Age Stage</label>
+            <select id="hero-age-select">
+              <option value="all">Any Age</option>
+              <option value="puppy">Puppy (&lt; 1 yr)</option>
+              <option value="young">Young (1 - 3 yrs)</option>
+              <option value="adult">Adult (3 - 7 yrs)</option>
+              <option value="senior">Senior (7+ yrs)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary hero-search-btn" id="hero-search-submit">
+            <i data-lucide="search" class="icon-sm"></i>
+            <span>Search Dogs</span>
+          </button>
+        </div>
+
+        <!-- Live Trust Stats -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon-wrap"><i data-lucide="heart-handshake"></i></div>
+            <div class="stat-text">
+              <span class="stat-number">1,850+</span>
+              <span class="stat-label">Successful Adoptions</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon-wrap"><i data-lucide="shield-check"></i></div>
+            <div class="stat-text">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Vet-Checked & Microchipped</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon-wrap"><i data-lucide="award"></i></div>
+            <div class="stat-text">
+              <span class="stat-number">99.4%</span>
+              <span class="stat-label">Match Satisfaction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card Showcase -->
+      <div class="hero-visual-wrapper">
+        <div class="hero-card-featured">
+          <div class="featured-img-container">
+            <img src="assets/images/hero_dog.jpg" alt="Featured Golden Retriever rescue dog named Cooper" class="hero-dog-image">
+            <div class="floating-badge available-badge">
+              <span class="status-indicator"></span> Ready For Adoption
+            </div>
+            <button class="floating-heart-btn" onclick="toggleFavorite(1)" title="Add Cooper to favorites" aria-label="Favorite Cooper">
+              <i data-lucide="heart" class="icon-sm"></i>
+            </button>
+          </div>
+          <div class="featured-card-info">
+            <div class="card-info-header">
+              <div>
+                <h3 class="dog-name">Cooper</h3>
+                <span class="dog-breed-sub">Golden Retriever • 2 Years Old</span>
+              </div>
+              <span class="gender-pill male"><i data-lucide="mars" class="icon-xs"></i> Male</span>
+            </div>
+            <p class="dog-snippet">Gentle, cuddly enthusiast who loves park fetch, lake splashes, and belly rubs.</p>
+            <div class="traits-row">
+              <span class="trait-tag"><i data-lucide="check" class="icon-xs"></i> Cat Friendly</span>
+              <span class="trait-tag"><i data-lucide="check" class="icon-xs"></i> House Trained</span>
+              <span class="trait-tag"><i data-lucide="check" class="icon-xs"></i> Leash Pro</span>
+            </div>
+            <div class="card-footer-action">
+              <button class="btn btn-secondary w-full" onclick="openDogModal(1)">
+                <span>Meet Cooper's Story</span>
+                <i data-lucide="arrow-right" class="icon-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Testimonial Micro-card -->
+        <div class="floating-micro-card">
+          <div class="micro-avatar">
+            <i data-lucide="sparkles" class="icon-amber"></i>
+          </div>
+          <div class="micro-text">
+            <strong>"Best adoption ever!"</strong>
+            <span>Maya adopted Luna 2 weeks ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Category Quick-Pills -->
+  <section class="filter-strip-section" id="dogs-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-tag"><i data-lucide="paw-print" class="icon-xs"></i> Explore Companions</div>
+        <h2 class="section-title">Loving Pups Waiting For Their People</h2>
+        <p class="section-subtitle">Browse through our currently sheltered dogs or filter by activity style, age, and personality.</p>
+      </div>
+
+      <!-- Controls & Filter Bar -->
+      <div class="filter-controls-wrap">
+        <div class="category-tabs" id="category-tabs" role="tablist">
+          <button class="cat-tab active" data-category="all">
+            <i data-lucide="layout-grid" class="icon-xs"></i> All Pups
+          </button>
+          <button class="cat-tab" data-category="active">
+            <i data-lucide="flame" class="icon-xs"></i> High Energy & Sporty
+          </button>
+          <button class="cat-tab" data-category="family">
+            <i data-lucide="users" class="icon-xs"></i> Family Friendly
+          </button>
+          <button class="cat-tab" data-category="apartment">
+            <i data-lucide="home" class="icon-xs"></i> Apartment Friendly
+          </button>
+          <button class="cat-tab" data-category="puppy">
+            <i data-lucide="baby" class="icon-xs"></i> Puppies (&lt;1 yr)
+          </button>
+          <button class="cat-tab" data-category="senior">
+            <i data-lucide="coffee" class="icon-xs"></i> Gentle Seniors
+          </button>
+        </div>
+
+        <div class="secondary-filters-bar">
+          <div class="search-input-box">
+            <i data-lucide="search" class="icon-sm search-icon"></i>
+            <input type="text" id="dog-keyword-search" placeholder="Search by name, breed, or personality..." autocomplete="off">
+            <button class="clear-search-btn" id="clear-search" style="display:none;">&times;</button>
+          </div>
+
+          <div class="filter-dropdowns">
+            <select id="sort-select" class="custom-select" aria-label="Sort dogs">
+              <option value="featured">Featured Pups</option>
+              <option value="youngest">Youngest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="name">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dog Cards Grid -->
+      <div class="dogs-grid" id="dogs-grid">
+        <!-- Dynamically injected via app.js -->
+      </div>
+
+      <!-- Empty State If No Results Found -->
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <div class="empty-icon"><i data-lucide="search-x"></i></div>
+        <h3>No fur buddies match your filters</h3>
+        <p>Try resetting the search keywords or choosing "All Pups" to view all available dogs.</p>
+        <button class="btn btn-primary mt-4" id="reset-filters-btn">
+          <i data-lucide="refresh-cw" class="icon-xs"></i> Reset Filters
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Breed Matchmaker Quiz -->
+  <section class="quiz-section" id="quiz-section">
+    <div class="container">
+      <div class="quiz-card-wrapper">
+        <div class="quiz-header">
+          <span class="section-tag"><i data-lucide="sparkles" class="icon-xs"></i> Smart Companion Quiz</span>
+          <h2 class="quiz-title">Find Your Perfect Canine Match in 3 Questions</h2>
+          <p class="quiz-sub">Answer a few lifestyle questions and our smart algorithm will recommend dogs that thrive in your routine.</p>
+        </div>
+
+        <!-- Quiz Progress -->
+        <div class="quiz-progress-bar-container">
+          <div class="quiz-progress-bar" id="quiz-progress" style="width: 33%;"></div>
+        </div>
+        <div class="quiz-step-counter" id="quiz-step-indicator">Question 1 of 3</div>
+
+        <!-- Quiz Question 1 -->
+        <div class="quiz-step active" id="quiz-step-1">
+          <h3 class="quiz-question"><i data-lucide="home" class="icon-sm"></i> What describes your current living environment?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-option-card" onclick="selectQuizAnswer(1, 'apartment')">
+              <div class="option-icon"><i data-lucide="building-2"></i></div>
+              <div class="option-text">
+                <strong>Apartment / Flat</strong>
+                <span>Cozy indoor space, walks in nearby parks</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(1, 'house_yard')">
+              <div class="option-icon"><i data-lucide="home"></i></div>
+              <div class="option-text">
+                <strong>Suburban Home with Fenced Yard</strong>
+                <span>Plenty of room to run and play outside</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(1, 'farm_country')">
+              <div class="option-icon"><i data-lucide="trees"></i></div>
+              <div class="option-text">
+                <strong>Country / Acreage / Farm</strong>
+                <span>Wide open trails, spacious terrain</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Question 2 -->
+        <div class="quiz-step" id="quiz-step-2" style="display:none;">
+          <h3 class="quiz-question"><i data-lucide="zap" class="icon-sm"></i> How active is your daily lifestyle?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-option-card" onclick="selectQuizAnswer(2, 'chill')">
+              <div class="option-icon"><i data-lucide="couch"></i></div>
+              <div class="option-text">
+                <strong>Relaxed & Cozy</strong>
+                <span>Leisurely neighborhood strolls & movie cuddles</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(2, 'moderate')">
+              <div class="option-icon"><i data-lucide="footprints"></i></div>
+              <div class="option-text">
+                <strong>Moderately Active</strong>
+                <span>Daily 45-60 min walks, weekend park visits</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(2, 'athlete')">
+              <div class="option-icon"><i data-lucide="mountain"></i></div>
+              <div class="option-text">
+                <strong>High Energy Adventurer</strong>
+                <span>Trail running, camping, hiking, fetch sessions</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Question 3 -->
+        <div class="quiz-step" id="quiz-step-3" style="display:none;">
+          <h3 class="quiz-question"><i data-lucide="graduation-cap" class="icon-sm"></i> What is your dog parenting experience?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-option-card" onclick="selectQuizAnswer(3, 'first_time')">
+              <div class="option-icon"><i data-lucide="heart"></i></div>
+              <div class="option-text">
+                <strong>First-Time Parent</strong>
+                <span>Looking for an eager-to-please, forgiving pup</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(3, 'experienced')">
+              <div class="option-icon"><i data-lucide="shield"></i></div>
+              <div class="option-text">
+                <strong>Experienced Dog Parent</strong>
+                <span>Comfortable with training, active routines, grooming</span>
+              </div>
+            </button>
+            <button class="quiz-option-card" onclick="selectQuizAnswer(3, 'expert')">
+              <div class="option-icon"><i data-lucide="star"></i></div>
+              <div class="option-text">
+                <strong>Seasoned Trainer / Pro</strong>
+                <span>Happy to train working breeds & special cases</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Result Screen -->
+        <div class="quiz-result-card" id="quiz-result" style="display:none;">
+          <div class="result-badge"><i data-lucide="award" class="icon-sm"></i> Ideal Match Found</div>
+          <h3 class="result-title" id="quiz-result-title">Your Top Companion Match</h3>
+          <p class="result-desc" id="quiz-result-desc">Based on your space and lifestyle, here are dogs ready to meet you right now!</p>
+          <div class="quiz-matches-grid" id="quiz-matches-grid">
+            <!-- Injected dynamically -->
+          </div>
+          <button class="btn btn-secondary mt-6" onclick="restartQuiz()">
+            <i data-lucide="rotate-ccw" class="icon-xs"></i> Retake Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Canine Care & Wellness Hub -->
+  <section class="care-section" id="care-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-tag"><i data-lucide="heart-pulse" class="icon-xs"></i> Healthy & Happy Pups</div>
+        <h2 class="section-title">Canine Wellness & Adopter Resources</h2>
+        <p class="section-subtitle">Everything you need for a smooth transition, lifelong health, and joyful companionship.</p>
+      </div>
+
+      <div class="care-tabs-wrapper">
+        <div class="care-nav-tabs" role="tablist">
+          <button class="care-nav-btn active" onclick="switchCareTab('nutrition')">
+            <i data-lucide="utensils" class="icon-xs"></i> Nutrition & Diet
+          </button>
+          <button class="care-nav-btn" onclick="switchCareTab('training')">
+            <i data-lucide="check-circle" class="icon-xs"></i> Positive Training
+          </button>
+          <button class="care-nav-btn" onclick="switchCareTab('health')">
+            <i data-lucide="stethoscope" class="icon-xs"></i> Vet & Vaccines
+          </button>
+          <button class="care-nav-btn" onclick="switchCareTab('checklist')">
+            <i data-lucide="clipboard-list" class="icon-xs"></i> 72-Hour Adopter Checklist
+          </button>
+        </div>
+
+        <div class="care-content-box" id="care-tab-nutrition">
+          <div class="care-card-inner">
+            <div class="care-info">
+              <h3>Tailored Canine Nutrition Guide</h3>
+              <p>Feeding your dog a high-protein, nutritionally balanced diet tailored to their age and weight ensures shiny coats, strong joints, and boundless energy.</p>
+              <ul class="care-points">
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Puppies (0-12 mo):</strong> Require calorie-dense kibble enriched with DHA for brain and eye development.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Adult Dogs:</strong> Portion control based on daily activity; monitor treats to prevent obesity.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Seniors:</strong> Add glucosamine & chondroitin supplements for joint flexibility and gentle digestion.</li>
+                <li><i data-lucide="alert-triangle" class="icon-xs text-danger"></i> <strong>Foods to Never Feed:</strong> Chocolate, grapes/raisins, onions, garlic, xylitol sweetener, and macadamia nuts.</li>
+              </ul>
+            </div>
+            <div class="care-stat-card">
+              <div class="stat-highlight">
+                <i data-lucide="scale" class="icon-lg text-primary"></i>
+                <h4>Hydration Rule</h4>
+                <p>Dogs need approximately <strong>1 ounce of clean water per pound</strong> of body weight daily.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="care-content-box" id="care-tab-training" style="display:none;">
+          <div class="care-card-inner">
+            <div class="care-info">
+              <h3>Positive Reinforcement Mastery</h3>
+              <p>Dogs learn fastest through clear rewards, praise, and patience. Avoid punishment-based methods that build anxiety.</p>
+              <ul class="care-points">
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>The 3-Second Window:</strong> Reward desired behavior immediately (within 3 seconds) with high-value treats and enthusiastic verbal praise.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Potty Routine:</strong> Take your puppy out after waking, after meals, and after vigorous play sessions.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Crate as Safe Haven:</strong> Never use crates for punishment; line with plush bedding and durable chew toys.</li>
+              </ul>
+            </div>
+            <div class="care-stat-card">
+              <div class="stat-highlight">
+                <i data-lucide="smile" class="icon-lg text-primary"></i>
+                <h4>Consistency is King</h4>
+                <p>10 minutes of daily micro-training produces better results than 1 hour once a week.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="care-content-box" id="care-tab-health" style="display:none;">
+          <div class="care-card-inner">
+            <div class="care-info">
+              <h3>Core Vaccinations & Preventative Care</h3>
+              <p>All BarkHaven dogs arrive fully vaccinated, spayed/neutered, and microchipped. Here is what to keep up annually.</p>
+              <ul class="care-points">
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Core Vaccines:</strong> DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza) and Rabies.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Parasite Prevention:</strong> Monthly heartworm preventatives and flea/tick chews year-round.</li>
+                <li><i data-lucide="check" class="icon-xs text-success"></i> <strong>Dental Health:</strong> Routine tooth brushing and annual dental scaling to prevent systemic organ stress.</li>
+              </ul>
+            </div>
+            <div class="care-stat-card">
+              <div class="stat-highlight">
+                <i data-lucide="shield-plus" class="icon-lg text-primary"></i>
+                <h4>Microchip Registry</h4>
+                <p>Always keep your contact information updated with the national pet chip registry.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="care-content-box" id="care-tab-checklist" style="display:none;">
+          <div class="care-card-inner">
+            <div class="care-info">
+              <h3>The 3-3-3 Rule: First Days at Home</h3>
+              <p>Dogs need time to decompress and understand that they are safe in their new environment.</p>
+              <ul class="care-points">
+                <li><i data-lucide="clock" class="icon-xs text-primary"></i> <strong>First 3 Days:</strong> Pup may feel overwhelmed, shy, or sleep extra. Keep environment quiet and predictable.</li>
+                <li><i data-lucide="clock" class="icon-xs text-primary"></i> <strong>First 3 Weeks:</strong> Starting to settle, showing true personality, learning household rhythms and potty spots.</li>
+                <li><i data-lucide="clock" class="icon-xs text-primary"></i> <strong>First 3 Months:</strong> Complete trust, secure bonding, feeling completely at home.</li>
+              </ul>
+            </div>
+            <div class="care-stat-card">
+              <div class="stat-highlight">
+                <i data-lucide="package-check" class="icon-lg text-primary"></i>
+                <h4>Starter Kit Ready</h4>
+                <p>We provide a leash, collar, ID tag, food bowl, and 14-day transition food supply with every adoption.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Adoption Works Section -->
+  <section class="process-section" id="process-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-tag"><i data-lucide="git-commit" class="icon-xs"></i> Smooth & Compassionate</div>
+        <h2 class="section-title">How Our 4-Step Adoption Works</h2>
+        <p class="section-subtitle">We make bringing home your new family member transparent, supportive, and stress-free.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="step-num">01</div>
+          <div class="step-icon"><i data-lucide="search"></i></div>
+          <h3>Find Your Match</h3>
+          <p>Explore our detailed dog profiles or use our Breed Matchmaker to find pups suited to your lifestyle.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="step-num">02</div>
+          <div class="step-icon"><i data-lucide="clipboard-pen-line"></i></div>
+          <h3>Submit Application</h3>
+          <p>Complete our quick online form detailing your living setup, family members, and routine.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="step-num">03</div>
+          <div class="step-icon"><i data-lucide="users"></i></div>
+          <h3>Meet & Greet</h3>
+          <p>Spend quality play time with the dog at our sanctuary or via a guided virtual introductory session.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="step-num">04</div>
+          <div class="step-icon"><i data-lucide="home"></i></div>
+          <h3>Welcome Home</h3>
+          <p>Finalize adoption papers, receive your starter kit, and enjoy our 24/7 post-adoption vet hotline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Happy Tails Stories -->
+  <section class="stories-section" id="stories-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-tag"><i data-lucide="heart" class="icon-xs"></i> Heartwarming Journeys</div>
+        <h2 class="section-title">Happy Tails & Adopter Stories</h2>
+        <p class="section-subtitle">Read how these wonderful rescues transformed the lives of their new families.</p>
+      </div>
+
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-stars">
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+          </div>
+          <p class="story-quote">"Adopting Winston (now Barnaby) was the easiest and warmest decision of my life. BarkHaven walked me through every training tip, and he's now my shadow!"</p>
+          <div class="story-author">
+            <div class="author-avatar"><i data-lucide="user"></i></div>
+            <div>
+              <strong>Elena Rostova</strong>
+              <span>Adopted Barnaby (Corgi mix) • Seattle, WA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <div class="story-stars">
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+          </div>
+          <p class="story-quote">"Our kids immediately bonded with Maverick the moment we arrived for the meet and greet. He is gentle, well-mannered, and the heart of our household."</p>
+          <div class="story-author">
+            <div class="author-avatar"><i data-lucide="user"></i></div>
+            <div>
+              <strong>Marcus & Sarah Chen</strong>
+              <span>Adopted Maverick (Golden) • Austin, TX</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <div class="story-stars">
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+            <i data-lucide="star" class="star-fill"></i>
+          </div>
+          <p class="story-quote">"The matchmaker quiz pointed me directly towards an Aussie mix, and Shadow is my favorite hiking buddy! She has conquered three mountain peaks with me already."</p>
+          <div class="story-author">
+            <div class="author-avatar"><i data-lucide="user"></i></div>
+            <div>
+              <strong>David K.</strong>
+              <span>Adopted Shadow (Australian Shepherd) • Boulder, CO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Newsletter CTA -->
+  <section class="newsletter-cta">
+    <div class="container">
+      <div class="newsletter-card">
+        <div class="newsletter-content">
+          <div class="cta-icon"><i data-lucide="bell-ring"></i></div>
+          <h2>Be the First to Know About New Arrivals</h2>
+          <p>Join 14,000+ dog lovers receiving our weekly adoption alerts, canine health tips, and local pet events.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+            <div class="input-with-button">
+              <input type="email" id="newsletter-email" placeholder="Enter your email address..." required>
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+          </form>
+          <div class="newsletter-disclaimer">
+            <i data-lucide="lock" class="icon-xs"></i> We respect your privacy. Unsubscribe at any time.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps Verified Reviews: Fish & Pets Paradise -->
+  <section class="google-reviews-section" id="google-reviews-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="section-tag"><i data-lucide="map-pin" class="icon-xs"></i> Google Maps Verified Reviews</div>
+        <h2 class="section-title">Fish & Pets Paradise — Google Reviews</h2>
+        <p class="section-subtitle">Real feedback from verified pet parents visiting our sanctuary and store on Old Phagwara Road, Deep Nagar, Jalandhar.</p>
+      </div>
+
+      <!-- Google Rating Summary Banner -->
+      <div class="google-summary-banner">
+        <div class="google-brand-left">
+          <div class="google-g-logo">
+            <!-- Google SVG G Logo -->
+            <svg viewBox="0 0 24 24" width="32" height="32">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+          </div>
+          <div class="google-rating-score-block">
+            <div class="score-stars-line">
+              <span class="google-big-score">4.6</span>
+              <div class="google-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 15.4l3.76 2.27-1-4.28 3.32-2.88-4.38-.38L12 6.1 10.3 10.13l-4.38.38 3.32 2.88-1 4.28L12 15.4z"/></svg>
+              </div>
+            </div>
+            <div class="google-rating-count-sub">
+              Based on <strong>337+ verified Google Maps reviews</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="google-actions-right">
+          <a href="https://www.google.com/maps/place/Fish+%26+Pets+Paradise/@31.286577,75.647471,17z/data=!3m1!4b1!4m6!3m5!1s0x391a593c061f6dd7:0x42ab7c56b71735e7!8m2!3d31.286577!4d75.647471!16s%2Fg%2F11b66cmkfr?entry=ttu" target="_blank" rel="noopener noreferrer" class="google-maps-btn">
+            <i data-lucide="external-link" class="icon-xs"></i>
+            <span>View on Google Maps</span>
+          </a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=31.286577,75.647471" target="_blank" rel="noopener noreferrer" class="google-directions-btn">
+            <i data-lucide="navigation" class="icon-xs"></i>
+            <span>Get Directions</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Google Reviews Cards Grid -->
+      <div class="google-reviews-grid">
+        <!-- Review 1 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar">G</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Gurpreet Singh <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">Local Guide • 42 reviews</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">3 weeks ago</span>
+          </div>
+          <p class="g-review-body">
+            "Best pet shop in Jalandhar! Harman bhaji is very humble and gives the most genuine advice for puppy nutrition, ear care, and core vaccination routines. Got my Golden Retriever puppy from here, 100% active and healthy. Highly recommended!"
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+
+        <!-- Review 2 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar avatar-alt-1">A</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Aman Sharma <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">18 reviews • 5 photos</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">1 month ago</span>
+          </div>
+          <p class="g-review-body">
+            "Authentic place for pure breed puppies and quality dog foods. Very reasonable pricing compared to other shops in Jalandhar. The shop also has an awesome aquarium fish collection and imported pet accessories."
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+
+        <!-- Review 3 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar avatar-alt-2">S</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Simranjit Kaur <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">Local Guide • 27 reviews</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">2 months ago</span>
+          </div>
+          <p class="g-review-body">
+            "Got our Frenchie puppy and initial starter kit from Fish & Pets Paradise. Harman Basra ji personally explained the puppy care routines and crate training. Truly a paradise for pet parents in Deep Nagar!"
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+
+        <!-- Review 4 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar avatar-alt-3">R</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Rajesh Kumar <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">31 reviews • 12 photos</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">3 months ago</span>
+          </div>
+          <p class="g-review-body">
+            "Very reliable dog boarding/hostel facility in Deep Nagar. Whenever I have to travel out of town, I leave my Labrador here without any stress. Neat, clean, and caring environment with timely updates."
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+
+        <!-- Review 5 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar avatar-alt-4">N</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Navjot Dhillon <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">12 reviews</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">4 months ago</span>
+          </div>
+          <p class="g-review-body">
+            "Best pet shop on Old Phagwara Road. They have all original imported dog foods, vitamins, accessories, shampoos, and high quality cages. Staff and owner are super polite and helpful."
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+
+        <!-- Review 6 -->
+        <article class="g-review-card">
+          <div class="g-review-user-header">
+            <div class="g-reviewer-avatar">R</div>
+            <div class="g-reviewer-meta">
+              <div class="g-reviewer-name">Rohit Verma <i data-lucide="check-circle" class="icon-xs text-primary"></i></div>
+              <span class="g-local-guide-tag">9 reviews • 3 photos</span>
+            </div>
+            <svg class="g-google-source-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="g-stars-row">
+            <div class="g-stars-list">
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+              <i data-lucide="star" class="g-star"></i>
+            </div>
+            <span class="g-review-time">5 months ago</span>
+          </div>
+          <p class="g-review-body">
+            "Pure breed puppies and authentic guidance! Harman Basra bhaji provides genuine health guidance and post-adoption support. 5-star experience every single time I visit."
+          </p>
+          <span class="g-verified-pill"><i data-lucide="shield-check" class="icon-xs"></i> Verified Google Review</span>
+        </article>
+      </div>
+
+      <!-- Store Details Strip -->
+      <div class="store-details-strip">
+        <div class="store-info-item">
+          <i data-lucide="map-pin" class="icon-lg"></i>
+          <div class="store-info-text">
+            <strong>Store Address:</strong>
+            <span>Old Phagwara Road, Deep Nagar, Opposite Bhatti STD, Jalandhar Cantt, Punjab 144005</span>
+          </div>
+        </div>
+        <div class="store-info-item">
+          <i data-lucide="phone" class="icon-lg"></i>
+          <div class="store-info-text">
+            <strong>Contact & WhatsApp:</strong>
+            <span>+91 94633 65025 / +91 70873 85526</span>
+          </div>
+        </div>
+        <div class="store-info-item">
+          <i data-lucide="clock" class="icon-lg"></i>
+          <div class="store-info-text">
+            <strong>Business Hours:</strong>
+            <span>Monday – Sunday: 10:00 AM – 8:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon-wrap">
+            <i data-lucide="dog" class="brand-icon"></i>
+          </div>
+          <span class="brand-name">Bark<span>Haven</span></span>
+        </div>
+        <p class="footer-tagline">In proud partnership with <strong>Fish & Pets Paradise</strong>. Dedicated to ethical pet adoption, pure breed care, canine nutrition, and boarding since 2018.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Navigation</h4>
+        <ul>
+          <li><a href="#dogs-section">Browse Dogs</a></li>
+          <li><a href="#quiz-section">Breed Matchmaker</a></li>
+          <li><a href="#care-section">Wellness Guides</a></li>
+          <li><a href="#google-reviews-section">Google Maps Reviews</a></li>
+          <li><a href="#process-section">Adoption Process</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Adoption Resources</h4>
+        <ul>
+          <li><a href="#care-section">First-Time Adopter Guide</a></li>
+          <li><a href="#care-section">Dog Nutrition 101</a></li>
+          <li><a href="#care-section">Puppy Vaccination Plan</a></li>
+          <li><a href="#google-reviews-section">Store Location & Directions</a></li>
+          <li><a href="#care-section">Dog Hostel & Boarding</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col contact-col">
+        <h4>Fish & Pets Paradise Store</h4>
+        <p><i data-lucide="map-pin" class="icon-xs text-primary"></i> Old Phagwara Road, Deep Nagar, Jalandhar Cantt, Punjab 144005</p>
+        <p><i data-lucide="phone" class="icon-xs text-primary"></i> +91 94633 65025 / +91 70873 85526</p>
+        <p><i data-lucide="mail" class="icon-xs text-primary"></i> info@fishandpetsparadise.com</p>
+        <div class="emergency-badge">
+          <i data-lucide="heart-pulse" class="icon-xs text-danger"></i> 24/7 Pet Helpline & Boarding Available
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BarkHaven Rescue Sanctuary. All Rights Reserved. Built with ❤️ for our four-legged friends.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Adoption</a>
+        <a href="#">Ethics & Welfare</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Favorites Slide-Out Drawer -->
+  <div class="drawer-overlay" id="fav-drawer-overlay" onclick="closeFavoritesDrawer()"></div>
+  <aside class="favorites-drawer" id="favorites-drawer" aria-label="Saved dogs drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <i data-lucide="heart" class="icon-sm text-danger"></i>
+        <h3>Saved Furry Friends</h3>
+        <span class="drawer-count-badge" id="drawer-count">0</span>
+      </div>
+      <button class="icon-btn close-drawer-btn" onclick="closeFavoritesDrawer()" aria-label="Close saved drawer">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawer-favorites-list">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="drawer-footer">
+      <p class="drawer-hint"><i data-lucide="info" class="icon-xs"></i> Saved dogs remain in your favorites for your visit.</p>
+    </div>
+  </aside>
+
+  <!-- Dog Detail & Adoption Application Modal -->
+  <div class="modal-overlay" id="dog-modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div class="dog-modal" id="dog-modal" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" onclick="closeDogModal()" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-body-layout" id="modal-content-container">
+        <!-- Injected dynamically based on selected dog -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons on load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
