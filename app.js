@@ -1,158 +1,335 @@
 /**
- * BarkHaven — Web Application Logic & Interactions
+ * Fish & Pets Paradise — E-Commerce Pet Shop & 24/7 Pet Care Consultation Logic
  */
 
-// Comprehensive Dog Data Set
-const DOGS_DATA = [
+// Configurable WhatsApp Phone Number (International format without '+' or spaces)
+const WHATSAPP_PHONE_NUMBER = "919463365025";
+const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE_NUMBER}`;
+
+// Realistic Pet Shop Products Dataset
+const PRODUCTS_DATA = [
   {
     id: 1,
-    name: "Cooper",
-    breed: "Golden Retriever",
-    age: 2,
-    ageLabel: "2 Years",
-    gender: "Male",
-    size: "Large",
-    weight: "65 lbs",
-    badge: "Available",
-    badgeType: "available",
-    image: "assets/images/hero_dog.jpg",
-    energyScore: 75,
-    energyLabel: "Moderate to High",
-    categories: ["family", "active"],
-    tags: ["Good with Kids", "Cat Friendly", "House Trained", "Loves Water"],
-    description: "Cooper is a joyful, affectionate Golden Retriever who lives for game days at the park, swimming in calm streams, and warm snuggles on the rug. He has mastered sit, stay, down, and paw.",
-    medical: "Fully vaccinated, microchipped, neutered, negative for heartworms.",
-    backstory: "Cooper's previous family had to relocate overseas. He was lovingly surrendered so he could find a devoted household with room to play.",
-    compatibility: ["Suburban Homes", "Families with Children", "Outdoor Adventurers"]
+    name: "Royal Canin Maxi Adult Dog Food",
+    category: "dog_food",
+    petType: "dog",
+    brand: "Royal Canin",
+    price: 3250,
+    originalPrice: 3850,
+    discount: "16% OFF",
+    rating: 4.9,
+    reviewsCount: 142,
+    badge: "Bestseller",
+    badgeType: "bestseller",
+    image: "assets/images/dog_food.jpg",
+    shortDesc: "Complete nutrition formulated for large breed adult dogs (26–44 kg) with joint support.",
+    fullDesc: "Royal Canin Maxi Adult is tailored specifically to meet the nutritional requirements of large breed dogs. Packed with optimal high-digestibility proteins and balanced dietary fibers, it promotes bone & joint health while maintaining ideal weight.",
+    specs: {
+      "Weight": "4 kg / 10 kg / 15 kg",
+      "Life Stage": "Adult (15 months to 5 years)",
+      "Flavor": "Poultry & Rice",
+      "Diet Type": "Non-Vegetarian Complete Diet"
+    },
+    inStock: true
   },
   {
     id: 2,
-    name: "Bella",
-    breed: "French Bulldog",
-    age: 0.35,
-    ageLabel: "4 Months",
-    gender: "Female",
-    size: "Small",
-    weight: "14 lbs",
-    badge: "New Arrival",
-    badgeType: "new",
-    image: "assets/images/frenchie.jpg",
-    energyScore: 40,
-    energyLabel: "Calm & Snuggly",
-    categories: ["apartment", "puppy", "family"],
-    tags: ["Apartment Pro", "Couch Cuddler", "Gentle Temperament"],
-    description: "Bella is an inquisitive little sweetheart with expressive bat ears and an adoration for soft laps. She enjoys calm afternoon strolls followed by long naps beside you.",
-    medical: "Up to date on puppy booster shots, dewormed, microchip enrolled.",
-    backstory: "Bella was rescued from an overcrowded regional shelter. She is thriving in her foster home and quickly learning potty pad routines.",
-    compatibility: ["Apartments & Condos", "First-time Parents", "Relaxed Lifestyles"]
+    name: "Arden Grange Puppy Starter Food (Chicken)",
+    category: "dog_food",
+    petType: "dog",
+    brand: "Arden Grange",
+    price: 1899,
+    originalPrice: 2250,
+    discount: "15% OFF",
+    rating: 4.8,
+    reviewsCount: 98,
+    badge: "Puppy Choice",
+    badgeType: "hot",
+    image: "assets/images/golden_pup.jpg",
+    shortDesc: "Nutrient-dense kibble enriched with DHA for brain development & strong immunity.",
+    fullDesc: "Arden Grange Puppy Rich in Fresh Chicken provides the perfect balance of vitamins and minerals to encourage steady, healthy growth rates. Hypoallergenic recipe free from wheat, beef, soya, and dairy.",
+    specs: {
+      "Weight": "2 kg / 6 kg",
+      "Life Stage": "Puppy (2 to 12 months)",
+      "Key Benefit": "Cognitive growth, immune boost",
+      "Origin": "Imported from UK"
+    },
+    inStock: true
   },
   {
     id: 3,
-    name: "Ghost",
-    breed: "Siberian Husky",
-    age: 3,
-    ageLabel: "3 Years",
-    gender: "Male",
-    size: "Large",
-    weight: "58 lbs",
-    badge: "Available",
-    badgeType: "available",
-    image: "assets/images/husky.jpg",
-    energyScore: 92,
-    energyLabel: "High Endurance",
-    categories: ["active"],
-    tags: ["Athletic", "Trail Ready", "Snow Lover", "Vocal Talker"],
-    description: "Ghost has hypnotic icy blue eyes and an adventurous spirit. He is the ultimate hiking and jogging companion for someone with an active outdoor lifestyle.",
-    medical: "Neutered, vaccinated, recent orthopedic clearance, microchipped.",
-    backstory: "Rescued from a northern mountain trail community, Ghost loves working alongside humans and responds excellently to positive harness training.",
-    compatibility: ["Active Hikers", "Fenced Yards", "Experienced Owners"]
+    name: "Whiskas Ocean Fish Adult Cat Wet Pouches (Pack of 12)",
+    category: "cat_food",
+    petType: "cat",
+    brand: "Whiskas",
+    price: 600,
+    originalPrice: 720,
+    discount: "17% OFF",
+    rating: 4.9,
+    reviewsCount: 186,
+    badge: "Top Rated",
+    badgeType: "bestseller",
+    image: "assets/images/cat_food.jpg",
+    shortDesc: "Delicious real fish chunks in rich jelly to support feline hydration & urinary health.",
+    fullDesc: "Whiskas Ocean Fish wet food pouches are specially formulated with real mackerel and salmon chunks in gravy/jelly. Provides complete & balanced nutrition with Zinc & Omega 6 fatty acids for a glossy coat.",
+    specs: {
+      "Pack Size": "12 x 85g Pouches",
+      "Life Stage": "Adult Cat (1+ Years)",
+      "Key Benefit": "Urinary tract care & hydration",
+      "Texture": "Chunks in Delicious Jelly"
+    },
+    inStock: true
   },
   {
     id: 4,
-    name: "Willow",
-    breed: "Australian Shepherd",
-    age: 0.5,
-    ageLabel: "6 Months",
-    gender: "Female",
-    size: "Medium",
-    weight: "28 lbs",
-    badge: "Available",
-    badgeType: "available",
-    image: "assets/images/aussie.jpg",
-    energyScore: 88,
-    energyLabel: "High & Eager",
-    categories: ["active", "puppy", "family"],
-    tags: ["Super Smart", "Agility Star", "Eager to Learn"],
-    description: "Willow is an extraordinarily bright Aussie pup with a striking blue merle coat. She loves puzzle toys, fetch, learning tricks, and participating in agility games.",
-    medical: "Vaccinated, dewormed, scheduled for routine spay (included with adoption).",
-    backstory: "Willow came to BarkHaven as part of a rural ranch litter rescue. She is socialized, friendly with other dogs, and loves people.",
-    compatibility: ["Suburban/Acreage Homes", "Agility Enthusiasts", "Families"]
+    name: "Farmina N&D Grain-Free Salmon & Melon Cat Food",
+    category: "cat_food",
+    petType: "cat",
+    brand: "Farmina",
+    price: 2150,
+    originalPrice: 2490,
+    discount: "14% OFF",
+    rating: 4.9,
+    reviewsCount: 74,
+    badge: "Ultra Premium",
+    badgeType: "premium",
+    image: "assets/images/cat_food.jpg",
+    shortDesc: "Low-glycemic grain-free recipe with 98% animal protein for indoor & active cats.",
+    fullDesc: "Farmina Natural & Delicious Prime Cat Food combines wild-caught salmon with cantaloupe melon. Designed to mimic natural feline ancestral diets with zero grains, GMOs, or artificial preservatives.",
+    specs: {
+      "Weight": "1.5 kg / 5 kg",
+      "Protein": "44% Crude Protein",
+      "Life Stage": "All Life Stages",
+      "Made in": "Italy"
+    },
+    inStock: true
   },
   {
     id: 5,
-    name: "Barnaby",
-    breed: "Pembroke Welsh Corgi",
-    age: 1.5,
-    ageLabel: "1.5 Years",
-    gender: "Male",
-    size: "Small",
-    weight: "26 lbs",
-    badge: "Urgent Foster",
-    badgeType: "urgent",
-    image: "assets/images/corgi.jpg",
-    energyScore: 60,
-    energyLabel: "Moderate & Cheerful",
-    categories: ["apartment", "family"],
-    tags: ["Charming", "Great with Other Dogs", "Leash Trained"],
-    description: "With his foxy smile and signature waddle, Barnaby brings an infectious positivity wherever he goes. He loves greeting neighbors and doing zoomies in the grass.",
-    medical: "Neutered, vaccinated, flea/tick preventative up to date, clear vet check.",
-    backstory: "Barnaby's former owner had severe health complications. He is looking for a warm, dedicated adopter to shower with loyalty.",
-    compatibility: ["Apartments or Houses", "Couples/Singles", "Dog-Friendly Parks"]
+    name: "JerHigh Calcium & Milk Dental Chews for Dogs",
+    category: "treats",
+    petType: "dog",
+    brand: "JerHigh",
+    price: 299,
+    originalPrice: 380,
+    discount: "21% OFF",
+    rating: 4.7,
+    reviewsCount: 112,
+    badge: "Dental Care",
+    badgeType: "deal",
+    image: "assets/images/hero_dog.jpg",
+    shortDesc: "Delicious milk-infused dental chew sticks that reduce plaque and strengthen teeth.",
+    fullDesc: "JerHigh Milk Dental Sticks are made with real chicken meat and fortified with bio-available calcium. Helps clean hard-to-reach teeth, combats bad breath, and satisfies natural chewing urges.",
+    specs: {
+      "Weight": "70g / 150g",
+      "Flavor": "Milk & Real Chicken",
+      "Benefit": "Tartar reduction & fresh breath",
+      "Texture": "Flexible chewy stick"
+    },
+    inStock: true
   },
   {
     id: 6,
-    name: "Sunny",
-    breed: "Golden Retriever",
-    age: 0.25,
-    ageLabel: "3 Months",
-    gender: "Male",
-    size: "Large",
-    weight: "16 lbs",
-    badge: "New Arrival",
-    badgeType: "new",
-    image: "assets/images/golden_pup.jpg",
-    energyScore: 70,
-    energyLabel: "Playful Puppy",
-    categories: ["puppy", "family", "apartment"],
-    tags: ["Ultra Sweet", "Eager Learner", "Loves Toys", "Gentle"],
-    description: "Sunny is as warm and cheerful as his name suggests. He sleeps through the night in his crate, loves chew bones, and makes friends with everyone he meets.",
-    medical: "Core puppy vaccinations commenced, microchipped, dewormed.",
-    backstory: "Surrendered from an unexpected litter, Sunny was nurtured in our puppy kindergarten nursery and is ready for his forever home.",
-    compatibility: ["Any Loving Home", "Patient Adopter", "Kids & Pets"]
+    name: "Temptations Creamy Puree Salmon Cat Treats",
+    category: "treats",
+    petType: "cat",
+    brand: "Temptations",
+    price: 249,
+    originalPrice: 299,
+    discount: "17% OFF",
+    rating: 4.9,
+    reviewsCount: 89,
+    badge: "Cat Favorite",
+    badgeType: "popular",
+    image: "assets/images/cat_food.jpg",
+    shortDesc: "Lickable creamy salmon puree treat sachets for hand feeding and topping food.",
+    fullDesc: "Temptations Creamy Puree is an irresistible treat made with real salmon. Squeeze directly from the sachet for bonding or use as an appetizing topper over dry kibble.",
+    specs: {
+      "Pack": "4 x 15g Sachets",
+      "Flavor": "Wild Salmon & Tuna",
+      "Texture": "Silky Creamy Puree",
+      "Calories": "Less than 8 kcal per sachet"
+    },
+    inStock: true
+  },
+  {
+    id: 7,
+    name: "Drools Absolute Calcium & Vitamin D3 Syrup (300ml)",
+    category: "medicines",
+    petType: "dog",
+    brand: "Drools",
+    price: 349,
+    originalPrice: 425,
+    discount: "18% OFF",
+    rating: 4.8,
+    reviewsCount: 165,
+    badge: "Vet Approved",
+    badgeType: "pharma",
+    image: "assets/images/aussie.jpg",
+    shortDesc: "Essential bone, teeth, and joint health syrup for growing puppies and lactating pets.",
+    fullDesc: "Drools Absolute Calcium Syrup delivers an optimal ratio of Calcium and Phosphorus along with Vitamin D3 to ensure strong skeletal development, prevention of rickets, and healthy cartilage in dogs.",
+    specs: {
+      "Volume": "300 ml",
+      "Form": "Pleasant tasting syrup",
+      "Recommended For": "Puppies, pregnant/nursing dogs, seniors",
+      "Dosage": "5-10 ml daily as per body weight"
+    },
+    inStock: true
+  },
+  {
+    id: 8,
+    name: "Fipronil Spot-On Flea & Tick Treatment",
+    category: "medicines",
+    petType: "dog",
+    brand: "FiproFort",
+    price: 399,
+    originalPrice: 499,
+    discount: "20% OFF",
+    rating: 4.9,
+    reviewsCount: 210,
+    badge: "High Demand",
+    badgeType: "pharma",
+    image: "assets/images/husky.jpg",
+    shortDesc: "Fast-acting topical spot-on pipette that eliminates ticks, fleas, and lice for 30 days.",
+    fullDesc: "Topical veterinary solution for dogs that kills existing fleas within 24 hours and ticks within 48 hours. Waterproof formula continues protecting even after bathing.",
+    specs: {
+      "Quantity": "Single Pipette (1.34 ml / 2.68 ml)",
+      "Duration": "1 Month Full Protection",
+      "Application": "Directly onto skin between shoulder blades",
+      "Safety": "Safe for dogs 8 weeks and older"
+    },
+    inStock: true
+  },
+  {
+    id: 9,
+    name: "Bio-Groom Natural Oatmeal Anti-Itch Pet Shampoo",
+    category: "grooming",
+    petType: "dog",
+    brand: "Bio-Groom",
+    price: 899,
+    originalPrice: 1100,
+    discount: "18% OFF",
+    rating: 4.9,
+    reviewsCount: 132,
+    badge: "Spa Formula",
+    badgeType: "spa",
+    image: "assets/images/frenchie.jpg",
+    shortDesc: "Colloidal oatmeal enriched soothing shampoo for dry, sensitive, or itchy pet skin.",
+    fullDesc: "Bio-Groom Natural Oatmeal Shampoo is soap-free, biodegradable, and formulated with natural colloidal oatmeal to relieve skin redness, dandruff, and seasonal allergies while leaving a soft, fresh fragrance.",
+    specs: {
+      "Volume": "355 ml (12 fl oz)",
+      "Suitable For": "Dogs & Cats of all breeds",
+      "Key Ingredients": "Colloidal Oatmeal, Aloe Vera, Chamomile",
+      "pH": "Balanced for pet coat & skin"
+    },
+    inStock: true
+  },
+  {
+    id: 10,
+    name: "Breathable Reflective Dog Hoodie & Sport Shirt",
+    category: "clothes",
+    petType: "dog",
+    brand: "PawStyle",
+    price: 499,
+    originalPrice: 699,
+    discount: "28% OFF",
+    rating: 4.7,
+    reviewsCount: 68,
+    badge: "Trendy",
+    badgeType: "hot",
+    image: "assets/images/corgi.jpg",
+    shortDesc: "Comfortable soft stretch cotton t-shirt with night-reflective safety stripes.",
+    fullDesc: "Keep your pet stylish and warm during chilly mornings and evening walks. High-elasticity breathable cotton fabric ensures zero restriction of movement and easy machine washing.",
+    specs: {
+      "Sizes Available": "S, M, L, XL, XXL",
+      "Material": "100% Breathable Combed Cotton",
+      "Features": "Reflective safety strip & leash opening",
+      "Care": "Machine wash cold"
+    },
+    inStock: true
+  },
+  {
+    id: 11,
+    name: "Heavy Duty Ergonomic No-Pull Dog Harness & Leash",
+    category: "toys",
+    petType: "dog",
+    brand: "TrailPaws",
+    price: 849,
+    originalPrice: 1199,
+    discount: "29% OFF",
+    rating: 4.9,
+    reviewsCount: 175,
+    badge: "Best Gear",
+    badgeType: "deal",
+    image: "assets/images/husky.jpg",
+    shortDesc: "Padded escape-proof chest harness with dual leash clips & heavy-duty shock leash.",
+    fullDesc: "Engineered to distribute pulling pressure evenly across your dog's torso to prevent choking. Features fast-release buckles, breathable sponge padding, and night-reflective 3M stitching.",
+    specs: {
+      "Sizes": "Small (10-25 lbs) / Medium (25-55 lbs) / Large (55-90 lbs)",
+      "Included": "Harness + 5ft Heavy Duty Bungee Leash",
+      "Material": "Military Grade Oxford Fabric + Zinc Alloy D-Ring",
+      "Adjustable": "4-point customization straps"
+    },
+    inStock: true
+  },
+  {
+    id: 12,
+    name: "Orthopedic Memory Foam Pet Lounge Bed (Waterproof)",
+    category: "beds",
+    petType: "dog",
+    brand: "ComfyPaws",
+    price: 1699,
+    originalPrice: 2200,
+    discount: "23% OFF",
+    rating: 4.9,
+    reviewsCount: 94,
+    badge: "Orthopedic",
+    badgeType: "premium",
+    image: "assets/images/frenchie.jpg",
+    shortDesc: "Ultra-plush high-density orthopedic memory foam bed with removable washable cover.",
+    fullDesc: "Provides superior joint support and pressure relief for dogs and cats. Features a waterproof inner liner to protect against accidents and a non-skid rubber bottom.",
+    specs: {
+      "Dimensions": "Medium (30x20 in) / Large (36x28 in)",
+      "Base": "3.5-inch High Density Memory Foam",
+      "Cover": "Soft Micro-Velvet (Machine Washable)",
+      "Colors": "Charcoal Grey / Royal Brown"
+    },
+    inStock: true
   }
 ];
 
 // App State
-let currentFilter = "all";
+let currentCategoryFilter = "all";
 let currentSearchTerm = "";
 let currentSort = "featured";
-let favoriteDogIds = [];
-let quizAnswers = { environment: null, activity: null, experience: null };
+let favoriteProductIds = [];
+let cartItems = []; // Array of { id, quantity, product }
 
 // DOM Elements
-const dogsGrid = document.getElementById("dogs-grid");
+const productsGrid = document.getElementById("products-grid");
 const emptyState = document.getElementById("empty-state");
-const searchInput = document.getElementById("dog-keyword-search");
+const searchInput = document.getElementById("product-keyword-search");
 const clearSearchBtn = document.getElementById("clear-search");
 const sortSelect = document.getElementById("sort-select");
-const catTabs = document.querySelectorAll(".cat-tab");
+const catTabs = document.querySelectorAll("#product-category-tabs .cat-tab");
+
+// Badges & Drawers
 const favBadgeCount = document.getElementById("fav-badge-count");
 const favDrawer = document.getElementById("favorites-drawer");
 const favDrawerOverlay = document.getElementById("fav-drawer-overlay");
 const drawerFavList = document.getElementById("drawer-favorites-list");
-const drawerCount = document.getElementById("drawer-count");
-const dogModal = document.getElementById("dog-modal");
-const dogModalOverlay = document.getElementById("dog-modal-overlay");
+const favDrawerCount = document.getElementById("fav-drawer-count");
+
+const cartBadgeCount = document.getElementById("cart-badge-count");
+const cartDrawer = document.getElementById("cart-drawer");
+const cartDrawerOverlay = document.getElementById("cart-drawer-overlay");
+const drawerCartList = document.getElementById("drawer-cart-list");
+const cartDrawerCount = document.getElementById("cart-drawer-count");
+const cartSubtotalEl = document.getElementById("cart-subtotal");
+
+// Modals & Controls
+const productModal = document.getElementById("product-modal");
+const productModalOverlay = document.getElementById("product-modal-overlay");
 const modalContentContainer = document.getElementById("modal-content-container");
 const themeToggleBtn = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
@@ -163,8 +340,9 @@ const navMenu = document.getElementById("nav-menu");
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedPreferences();
   setupEventListeners();
-  renderDogs();
+  renderProducts();
   updateFavoritesUI();
+  updateCartUI();
   initTypewriter();
   initLucide();
 });
@@ -175,18 +353,27 @@ function initLucide() {
   }
 }
 
-// Load Favorites & Theme from LocalStorage
+// Load Favorites, Cart & Theme from LocalStorage
 function loadSavedPreferences() {
-  const savedFavs = localStorage.getItem("barkhaven_favs");
+  const savedFavs = localStorage.getItem("petparadise_favs");
   if (savedFavs) {
     try {
-      favoriteDogIds = JSON.parse(savedFavs);
+      favoriteProductIds = JSON.parse(savedFavs);
     } catch (e) {
-      favoriteDogIds = [];
+      favoriteProductIds = [];
     }
   }
 
-  const savedTheme = localStorage.getItem("barkhaven_theme");
+  const savedCart = localStorage.getItem("petparadise_cart");
+  if (savedCart) {
+    try {
+      cartItems = JSON.parse(savedCart);
+    } catch (e) {
+      cartItems = [];
+    }
+  }
+
+  const savedTheme = localStorage.getItem("petparadise_theme");
   if (savedTheme) {
     document.documentElement.setAttribute("data-theme", savedTheme);
     updateThemeIcon(savedTheme);
@@ -196,54 +383,75 @@ function loadSavedPreferences() {
   }
 }
 
-// Event Listeners Setup
+// Setup Event Listeners
 function setupEventListeners() {
-  // Category tabs
+  // Category tabs on products section
   catTabs.forEach(tab => {
     tab.addEventListener("click", () => {
       catTabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-      currentFilter = tab.getAttribute("data-category");
-      renderDogs();
+      currentCategoryFilter = tab.getAttribute("data-category");
+      renderProducts();
     });
   });
 
   // Keyword Search
-  searchInput.addEventListener("input", (e) => {
-    currentSearchTerm = e.target.value.trim().toLowerCase();
-    clearSearchBtn.style.display = currentSearchTerm ? "block" : "none";
-    renderDogs();
-  });
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearchTerm = e.target.value.trim().toLowerCase();
+      if (clearSearchBtn) clearSearchBtn.style.display = currentSearchTerm ? "block" : "none";
+      renderProducts();
+    });
+  }
 
-  clearSearchBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    currentSearchTerm = "";
-    clearSearchBtn.style.display = "none";
-    renderDogs();
-  });
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener("click", () => {
+      if (searchInput) searchInput.value = "";
+      currentSearchTerm = "";
+      clearSearchBtn.style.display = "none";
+      renderProducts();
+    });
+  }
 
   // Sort Selection
-  sortSelect.addEventListener("change", (e) => {
-    currentSort = e.target.value;
-    renderDogs();
-  });
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      renderProducts();
+    });
+  }
 
   // Hero Quick Search
   const heroSearchBtn = document.getElementById("hero-search-submit");
+  const heroSearchInput = document.getElementById("hero-product-search");
+  const heroCatSelect = document.getElementById("hero-category-select");
+
   if (heroSearchBtn) {
     heroSearchBtn.addEventListener("click", () => {
-      const breedVal = document.getElementById("hero-breed-select").value;
-      const sizeVal = document.getElementById("hero-size-select").value;
-      const ageVal = document.getElementById("hero-age-select").value;
+      const searchVal = heroSearchInput ? heroSearchInput.value.trim().toLowerCase() : "";
+      const catVal = heroCatSelect ? heroCatSelect.value : "all";
 
-      // Scroll to dogs section
-      const targetSec = document.getElementById("dogs-section");
-      if (targetSec) {
-        targetSec.scrollIntoView({ behavior: "smooth" });
+      currentSearchTerm = searchVal;
+      currentCategoryFilter = catVal;
+
+      if (searchInput) searchInput.value = searchVal;
+      if (clearSearchBtn) clearSearchBtn.style.display = searchVal ? "block" : "none";
+
+      // Sync active cat tab
+      catTabs.forEach(tab => {
+        if (tab.getAttribute("data-category") === catVal) {
+          tab.classList.add("active");
+        } else {
+          tab.classList.remove("active");
+        }
+      });
+
+      renderProducts();
+
+      const prodSection = document.getElementById("products-section");
+      if (prodSection) {
+        prodSection.scrollIntoView({ behavior: "smooth" });
       }
-
-      // Filter dogs according to criteria
-      filterHeroDogs(breedVal, sizeVal, ageVal);
     });
   }
 
@@ -251,17 +459,22 @@ function setupEventListeners() {
   const resetBtn = document.getElementById("reset-filters-btn");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      currentFilter = "all";
+      currentCategoryFilter = "all";
       currentSearchTerm = "";
-      searchInput.value = "";
-      clearSearchBtn.style.display = "none";
+      if (searchInput) searchInput.value = "";
+      if (clearSearchBtn) clearSearchBtn.style.display = "none";
       catTabs.forEach(t => t.classList.remove("active"));
       if (catTabs[0]) catTabs[0].classList.add("active");
-      renderDogs();
+      renderProducts();
     });
   }
 
-  // Favorites Drawer Trigger
+  // Cart & Favorites Drawer Triggers
+  const cartTrigger = document.getElementById("cart-drawer-trigger");
+  if (cartTrigger) {
+    cartTrigger.addEventListener("click", openCartDrawer);
+  }
+
   const favTrigger = document.getElementById("fav-drawer-trigger");
   if (favTrigger) {
     favTrigger.addEventListener("click", openFavoritesDrawer);
@@ -273,142 +486,157 @@ function setupEventListeners() {
   }
 
   // Mobile Navigation
-  if (mobileMenuBtn) {
+  if (mobileMenuBtn && navMenu) {
     mobileMenuBtn.addEventListener("click", () => {
       navMenu.classList.toggle("mobile-open");
     });
   }
 
-  // Quick Search icon in header
+  // Header quick search trigger
   const searchTriggerBtn = document.getElementById("search-trigger-btn");
   if (searchTriggerBtn) {
     searchTriggerBtn.addEventListener("click", () => {
-      const dogsSec = document.getElementById("dogs-section");
-      if (dogsSec) {
-        dogsSec.scrollIntoView({ behavior: "smooth" });
-        setTimeout(() => searchInput.focus(), 400);
+      const prodSec = document.getElementById("products-section");
+      if (prodSec) {
+        prodSec.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          if (searchInput) searchInput.focus();
+        }, 400);
       }
     });
   }
 }
 
-// Hero Search logic
-function filterHeroDogs(breed, size, ageStage) {
-  let matched = DOGS_DATA.filter(dog => {
-    let matchesBreed = (breed === "all" || dog.breed.toLowerCase().includes(breed.toLowerCase()));
-    let matchesSize = (size === "all" || dog.size === size);
-    let matchesAge = true;
-    if (ageStage === "puppy") matchesAge = dog.age < 1;
-    else if (ageStage === "young") matchesAge = dog.age >= 1 && dog.age <= 3;
-    else if (ageStage === "adult") matchesAge = dog.age > 3 && dog.age < 7;
-    else if (ageStage === "senior") matchesAge = dog.age >= 7;
+// Global Category Filter from Category Cards
+window.filterCategoryFromCard = function(categoryKey) {
+  currentCategoryFilter = categoryKey;
+  currentSearchTerm = "";
+  if (searchInput) searchInput.value = "";
+  if (clearSearchBtn) clearSearchBtn.style.display = "none";
 
-    return matchesBreed && matchesSize && matchesAge;
+  catTabs.forEach(tab => {
+    if (tab.getAttribute("data-category") === categoryKey) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
   });
 
-  renderFilteredDogs(matched);
-  showToast(`Found ${matched.length} dog${matched.length === 1 ? '' : 's'} matching your search!`, "info");
-}
+  renderProducts();
 
-// Render Dogs Grid
-function renderDogs() {
-  let filtered = [...DOGS_DATA];
+  const prodSec = document.getElementById("products-section");
+  if (prodSec) {
+    prodSec.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+// Filter by Pet Type (Dog / Cat)
+window.filterByPetType = function(petType) {
+  currentCategoryFilter = "all";
+  currentSearchTerm = petType;
+  if (searchInput) searchInput.value = petType;
+  if (clearSearchBtn) clearSearchBtn.style.display = "block";
+
+  catTabs.forEach(t => t.classList.remove("active"));
+  if (catTabs[0]) catTabs[0].classList.add("active");
+
+  renderProducts();
+
+  const prodSec = document.getElementById("products-section");
+  if (prodSec) {
+    prodSec.scrollIntoView({ behavior: "smooth" });
+  }
+  showToast(`Showing popular ${petType.toUpperCase()} products 🐾`, "info");
+};
+
+// Render Products Grid
+function renderProducts() {
+  let filtered = [...PRODUCTS_DATA];
 
   // Category filter
-  if (currentFilter !== "all") {
-    if (currentFilter === "senior") {
-      filtered = filtered.filter(d => d.age >= 7);
-    } else if (currentFilter === "puppy") {
-      filtered = filtered.filter(d => d.age < 1 || d.categories.includes("puppy"));
-    } else {
-      filtered = filtered.filter(d => d.categories.includes(currentFilter));
-    }
+  if (currentCategoryFilter !== "all") {
+    filtered = filtered.filter(p => p.category === currentCategoryFilter);
   }
 
   // Keyword search
   if (currentSearchTerm) {
-    filtered = filtered.filter(d => {
-      const text = `${d.name} ${d.breed} ${d.description} ${d.tags.join(" ")}`.toLowerCase();
+    filtered = filtered.filter(p => {
+      const text = `${p.name} ${p.brand} ${p.category} ${p.petType} ${p.shortDesc} ${p.fullDesc}`.toLowerCase();
       return text.includes(currentSearchTerm);
     });
   }
 
   // Sort
-  if (currentSort === "youngest") {
-    filtered.sort((a, b) => a.age - b.age);
-  } else if (currentSort === "oldest") {
-    filtered.sort((a, b) => b.age - a.age);
+  if (currentSort === "price_low") {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (currentSort === "price_high") {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (currentSort === "rating") {
+    filtered.sort((a, b) => b.rating - a.rating);
   } else if (currentSort === "name") {
     filtered.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  renderFilteredDogs(filtered);
+  renderFilteredProducts(filtered);
 }
 
-function renderFilteredDogs(dogsList) {
-  if (!dogsGrid) return;
+function renderFilteredProducts(productsList) {
+  if (!productsGrid) return;
 
-  if (dogsList.length === 0) {
-    dogsGrid.innerHTML = "";
-    emptyState.style.display = "block";
+  if (productsList.length === 0) {
+    productsGrid.innerHTML = "";
+    if (emptyState) emptyState.style.display = "block";
     return;
   }
 
-  emptyState.style.display = "none";
-  dogsGrid.innerHTML = dogsList.map(dog => {
-    const isFav = favoriteDogIds.includes(dog.id);
-    const genderIcon = dog.gender === "Male" ? "mars" : "venus";
-    const genderClass = dog.gender.toLowerCase();
+  if (emptyState) emptyState.style.display = "none";
+
+  productsGrid.innerHTML = productsList.map(prod => {
+    const isFav = favoriteProductIds.includes(prod.id);
+    const inCart = cartItems.find(item => item.id === prod.id);
 
     return `
-      <article class="dog-card" data-id="${dog.id}">
-        <div class="dog-card-img-wrap">
-          <img src="${dog.image}" alt="${dog.name}, a ${dog.breed}" class="dog-card-img" loading="lazy">
-          <span class="card-badge ${dog.badgeType}">${dog.badge}</span>
+      <article class="product-card" data-id="${prod.id}">
+        <div class="product-card-img-wrap">
+          <img src="${prod.image}" alt="${prod.name}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero_dog.jpg';">
+          <span class="product-badge ${prod.badgeType}">${prod.badge}</span>
           <button class="card-fav-btn ${isFav ? 'active' : ''}" 
-                  onclick="toggleFavorite(${dog.id})" 
-                  title="${isFav ? 'Remove from' : 'Add to'} favorites" 
-                  aria-label="Favorite ${dog.name}">
+                  onclick="toggleFavorite(${prod.id})" 
+                  title="${isFav ? 'Remove from wishlist' : 'Save to wishlist'}" 
+                  aria-label="Wishlist ${prod.name}">
             <i data-lucide="heart" class="icon-sm" ${isFav ? 'style="fill: #EF4444; color: #EF4444;"' : ''}></i>
           </button>
         </div>
 
-        <div class="dog-card-body">
-          <div class="card-title-row">
-            <h3 class="card-dog-name">${dog.name}</h3>
-            <span class="gender-pill ${genderClass}">
-              <i data-lucide="${genderIcon}" class="icon-xs"></i> ${dog.gender}
-            </span>
-          </div>
-
-          <div class="card-dog-breed">${dog.breed}</div>
-
-          <div class="card-meta-pills">
-            <span class="meta-pill"><i data-lucide="calendar" class="icon-xs"></i> ${dog.ageLabel}</span>
-            <span>•</span>
-            <span class="meta-pill"><i data-lucide="scale" class="icon-xs"></i> ${dog.weight}</span>
-            <span>•</span>
-            <span class="meta-pill"><i data-lucide="maximize-2" class="icon-xs"></i> ${dog.size}</span>
-          </div>
-
-          <div class="energy-meter-container">
-            <div class="energy-label-row">
-              <span>Energy: ${dog.energyLabel}</span>
-              <span>${dog.energyScore}%</span>
-            </div>
-            <div class="energy-bar-bg">
-              <div class="energy-bar-fill" style="width: ${dog.energyScore}%;"></div>
+        <div class="product-card-body">
+          <div class="product-meta-row">
+            <span class="product-brand-tag">${prod.brand}</span>
+            <div class="product-rating-stars">
+              <i data-lucide="star" class="star-gold"></i>
+              <span class="rating-num">${prod.rating}</span>
+              <span class="reviews-count">(${prod.reviewsCount})</span>
             </div>
           </div>
 
-          <div class="card-tags">
-            ${dog.tags.slice(0, 3).map(tag => `<span class="tag-badge">${tag}</span>`).join("")}
+          <h3 class="product-title" onclick="openProductModal(${prod.id})">${prod.name}</h3>
+
+          <p class="product-snippet">${prod.shortDesc}</p>
+
+          <div class="product-price-row">
+            <div class="price-stack">
+              <span class="current-price">₹${prod.price.toLocaleString()}</span>
+              ${prod.originalPrice ? `<span class="original-price">₹${prod.originalPrice.toLocaleString()}</span>` : ''}
+            </div>
+            ${prod.discount ? `<span class="discount-pill">${prod.discount}</span>` : ''}
           </div>
 
-          <div class="card-actions">
-            <button class="btn btn-primary w-full" onclick="openDogModal(${dog.id})">
-              <span>Meet ${dog.name}</span>
-              <i data-lucide="arrow-right" class="icon-xs"></i>
+          <div class="product-card-actions">
+            <button class="btn btn-primary add-cart-btn w-full" onclick="addToCart(${prod.id})">
+              <i data-lucide="shopping-cart" class="icon-xs"></i>
+              <span>${inCart ? `In Cart (${inCart.quantity})` : 'Add to Cart'}</span>
+            </button>
+            <button class="btn btn-secondary quick-view-btn" onclick="openProductModal(${prod.id})" title="Quick View & Dosage">
+              <i data-lucide="eye" class="icon-xs"></i>
             </button>
           </div>
         </div>
@@ -419,79 +647,250 @@ function renderFilteredDogs(dogsList) {
   initLucide();
 }
 
-// Favorites Management
-window.toggleFavorite = function(dogId) {
-  const dog = DOGS_DATA.find(d => d.id === dogId);
-  if (!dog) return;
+// Shopping Cart Management
+window.addToCart = function(productId, qtyToAdd = 1) {
+  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  if (!product) return;
 
-  const index = favoriteDogIds.indexOf(dogId);
-  if (index > -1) {
-    favoriteDogIds.splice(index, 1);
-    showToast(`Removed ${dog.name} from saved favorites`, "info");
+  const existing = cartItems.find(item => item.id === productId);
+  if (existing) {
+    existing.quantity += qtyToAdd;
   } else {
-    favoriteDogIds.push(dogId);
-    showToast(`Added ${dog.name} to saved favorites! ❤️`, "success");
+    cartItems.push({ id: productId, quantity: qtyToAdd, product });
   }
 
-  localStorage.setItem("barkhaven_favs", JSON.stringify(favoriteDogIds));
-  updateFavoritesUI();
-  renderDogs();
+  saveCart();
+  updateCartUI();
+  renderProducts();
+  showToast(`Added ${product.name} to cart! 🛒`, "success");
 };
 
-function updateFavoritesUI() {
-  const count = favoriteDogIds.length;
-  if (favBadgeCount) {
-    favBadgeCount.textContent = count;
-    favBadgeCount.classList.add("pop");
-    setTimeout(() => favBadgeCount.classList.remove("pop"), 300);
-  }
-  if (drawerCount) {
-    drawerCount.textContent = count;
-  }
-  renderDrawerFavorites();
-}
-
-function openFavoritesDrawer() {
-  favDrawer.classList.add("active");
-  favDrawerOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
-  renderDrawerFavorites();
-}
-
-window.closeFavoritesDrawer = function() {
-  favDrawer.classList.remove("active");
-  favDrawerOverlay.classList.remove("active");
-  document.body.style.overflow = "";
+window.removeFromCart = function(productId) {
+  cartItems = cartItems.filter(item => item.id !== productId);
+  saveCart();
+  updateCartUI();
+  renderProducts();
+  showToast("Item removed from cart", "info");
 };
 
-function renderDrawerFavorites() {
-  if (!drawerFavList) return;
+window.updateCartItemQty = function(productId, delta) {
+  const item = cartItems.find(item => item.id === productId);
+  if (!item) return;
 
-  if (favoriteDogIds.length === 0) {
-    drawerFavList.innerHTML = `
-      <div class="empty-state" style="padding: 2.5rem 0;">
-        <div class="empty-icon"><i data-lucide="heart-off"></i></div>
-        <h4>No saved dogs yet</h4>
-        <p style="font-size: 0.85rem;">Click the heart icon on any dog's card to keep track of pups you love.</p>
+  item.quantity += delta;
+  if (item.quantity <= 0) {
+    removeFromCart(productId);
+    return;
+  }
+
+  saveCart();
+  updateCartUI();
+  renderProducts();
+};
+
+function saveCart() {
+  localStorage.setItem("petparadise_cart", JSON.stringify(cartItems));
+}
+
+function updateCartUI() {
+  const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const subtotal = cartItems.reduce((sum, item) => {
+    const prod = PRODUCTS_DATA.find(p => p.id === item.id) || item.product;
+    return sum + (prod.price * item.quantity);
+  }, 0);
+
+  if (cartBadgeCount) {
+    cartBadgeCount.textContent = totalCount;
+    cartBadgeCount.classList.add("pop");
+    setTimeout(() => cartBadgeCount.classList.remove("pop"), 300);
+  }
+
+  if (cartDrawerCount) {
+    cartDrawerCount.textContent = totalCount;
+  }
+
+  if (cartSubtotalEl) {
+    cartSubtotalEl.textContent = `₹${subtotal.toLocaleString()}`;
+  }
+
+  renderDrawerCart(subtotal);
+}
+
+function renderDrawerCart(subtotal) {
+  if (!drawerCartList) return;
+
+  if (cartItems.length === 0) {
+    drawerCartList.innerHTML = `
+      <div class="empty-state" style="padding: 3rem 1rem;">
+        <div class="empty-icon"><i data-lucide="shopping-bag"></i></div>
+        <h4>Your Cart is Empty</h4>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+          Add premium pet food, medicines, treats, and grooming essentials to place your order.
+        </p>
+        <button class="btn btn-primary mt-4" onclick="closeCartDrawer(); filterCategoryFromCard('all');">
+          Start Shopping
+        </button>
       </div>
     `;
     initLucide();
     return;
   }
 
-  const favDogs = DOGS_DATA.filter(d => favoriteDogIds.includes(d.id));
+  drawerCartList.innerHTML = cartItems.map(item => {
+    const prod = PRODUCTS_DATA.find(p => p.id === item.id) || item.product;
+    return `
+      <div class="cart-item">
+        <img src="${prod.image}" alt="${prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='assets/images/hero_dog.jpg';">
+        <div class="cart-item-details">
+          <h4 class="cart-item-name">${prod.name}</h4>
+          <span class="cart-item-brand">${prod.brand} • ₹${prod.price.toLocaleString()} each</span>
+          <div class="cart-qty-row">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="updateCartItemQty(${prod.id}, -1)">-</button>
+              <span class="qty-val">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateCartItemQty(${prod.id}, 1)">+</button>
+            </div>
+            <strong class="cart-item-total">₹${(prod.price * item.quantity).toLocaleString()}</strong>
+            <button class="cart-item-remove" onclick="removeFromCart(${prod.id})" title="Remove item">
+              <i data-lucide="trash-2" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
 
-  drawerFavList.innerHTML = favDogs.map(dog => `
+  initLucide();
+}
+
+function openCartDrawer() {
+  if (cartDrawer && cartDrawerOverlay) {
+    cartDrawer.classList.add("active");
+    cartDrawerOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+    updateCartUI();
+  }
+}
+
+window.closeCartDrawer = function() {
+  if (cartDrawer && cartDrawerOverlay) {
+    cartDrawer.classList.remove("active");
+    cartDrawerOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+};
+
+// WhatsApp Direct Checkout for Entire Cart
+window.checkoutCartViaWhatsApp = function() {
+  if (cartItems.length === 0) {
+    showToast("Your cart is empty! Add items first.", "info");
+    return;
+  }
+
+  let subtotal = 0;
+  let itemsSummary = cartItems.map((item, index) => {
+    const prod = PRODUCTS_DATA.find(p => p.id === item.id) || item.product;
+    const itemTotal = prod.price * item.quantity;
+    subtotal += itemTotal;
+    return `${index + 1}. *${prod.name}* (${prod.brand})\n   Qty: ${item.quantity} x ₹${prod.price} = ₹${itemTotal.toLocaleString()}`;
+  }).join("\n\n");
+
+  const message = `Hello *Fish & Pets Paradise*! 👋\n\nI would like to order the following pet products from your website:\n\n${itemsSummary}\n\n━━━━━━━━━━━━━━━━━━━━\n💰 *Total Order Amount: ₹${subtotal.toLocaleString()}*\n━━━━━━━━━━━━━━━━━━━━\n\nPlease confirm availability and delivery address details. Thank you!`;
+
+  const encodedMsg = encodeURIComponent(message);
+  const checkoutUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodedMsg}`;
+
+  // Trigger celebration confetti
+  if (window.confetti) {
+    window.confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.6 }
+    });
+  }
+
+  window.open(checkoutUrl, "_blank");
+  closeCartDrawer();
+  showToast("Opening WhatsApp to complete your order! 🚀", "success");
+};
+
+// Favorites / Wishlist Management
+window.toggleFavorite = function(productId) {
+  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  if (!product) return;
+
+  const index = favoriteProductIds.indexOf(productId);
+  if (index > -1) {
+    favoriteProductIds.splice(index, 1);
+    showToast(`Removed ${product.name} from wishlist`, "info");
+  } else {
+    favoriteProductIds.push(productId);
+    showToast(`Saved ${product.name} to wishlist! ❤️`, "success");
+  }
+
+  localStorage.setItem("petparadise_favs", JSON.stringify(favoriteProductIds));
+  updateFavoritesUI();
+  renderProducts();
+};
+
+function updateFavoritesUI() {
+  const count = favoriteProductIds.length;
+  if (favBadgeCount) {
+    favBadgeCount.textContent = count;
+    favBadgeCount.classList.add("pop");
+    setTimeout(() => favBadgeCount.classList.remove("pop"), 300);
+  }
+  if (favDrawerCount) {
+    favDrawerCount.textContent = count;
+  }
+  renderDrawerFavorites();
+}
+
+function openFavoritesDrawer() {
+  if (favDrawer && favDrawerOverlay) {
+    favDrawer.classList.add("active");
+    favDrawerOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+    renderDrawerFavorites();
+  }
+}
+
+window.closeFavoritesDrawer = function() {
+  if (favDrawer && favDrawerOverlay) {
+    favDrawer.classList.remove("active");
+    favDrawerOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+};
+
+function renderDrawerFavorites() {
+  if (!drawerFavList) return;
+
+  if (favoriteProductIds.length === 0) {
+    drawerFavList.innerHTML = `
+      <div class="empty-state" style="padding: 2.5rem 0;">
+        <div class="empty-icon"><i data-lucide="heart-off"></i></div>
+        <h4>No saved products yet</h4>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Click the heart icon on any product to save it to your wishlist.</p>
+      </div>
+    `;
+    initLucide();
+    return;
+  }
+
+  const favProducts = PRODUCTS_DATA.filter(p => favoriteProductIds.includes(p.id));
+
+  drawerFavList.innerHTML = favProducts.map(prod => `
     <div class="fav-item">
-      <img src="${dog.image}" alt="${dog.name}" class="fav-thumb">
+      <img src="${prod.image}" alt="${prod.name}" class="fav-thumb" onerror="this.onerror=null; this.src='assets/images/hero_dog.jpg';">
       <div class="fav-details">
-        <h4>${dog.name}</h4>
-        <span>${dog.breed} • ${dog.ageLabel}</span>
+        <h4>${prod.name}</h4>
+        <span>${prod.brand} • ₹${prod.price.toLocaleString()}</span>
         <div class="fav-actions">
-          <button class="fav-meet-btn" onclick="closeFavoritesDrawer(); openDogModal(${dog.id});">
-            Meet Me
+          <button class="fav-meet-btn" onclick="addToCart(${prod.id}); closeFavoritesDrawer();">
+            Add to Cart
           </button>
-          <button class="fav-remove-btn" onclick="toggleFavorite(${dog.id})" title="Remove">
+          <button class="fav-remove-btn" onclick="toggleFavorite(${prod.id})" title="Remove">
             <i data-lucide="trash-2" class="icon-xs"></i>
           </button>
         </div>
@@ -502,263 +901,117 @@ function renderDrawerFavorites() {
   initLucide();
 }
 
-// Dog Modal & Adoption Application
-window.openDogModal = function(dogId) {
-  const dog = DOGS_DATA.find(d => d.id === dogId);
-  if (!dog) return;
+// Product Quick View & WhatsApp Instant Order Modal
+window.openProductModal = function(productId) {
+  const prod = PRODUCTS_DATA.find(p => p.id === productId);
+  if (!prod) return;
 
-  const isFav = favoriteDogIds.includes(dog.id);
-
-  modalContentContainer.innerHTML = `
-    <!-- Left Column: Dog Profile -->
-    <div class="modal-col-left">
-      <div class="modal-img-wrap">
-        <img src="${dog.image}" alt="${dog.name}">
-      </div>
-
-      <div class="modal-badges-row">
-        <span class="card-badge ${dog.badgeType}">${dog.badge}</span>
-        <span class="tag-badge"><i data-lucide="activity" class="icon-xs"></i> Energy: ${dog.energyLabel}</span>
-      </div>
-
-      <h2 class="modal-dog-title">${dog.name}</h2>
-      <div class="modal-dog-meta">${dog.breed} • ${dog.ageLabel} • ${dog.gender}</div>
-
-      <p class="modal-bio-text">${dog.description}</p>
-
-      <div class="modal-quick-stats">
-        <div class="quick-stat-box">
-          <small>Medical Status</small>
-          <span>100% Cleared</span>
-        </div>
-        <div class="quick-stat-box">
-          <small>Ideal Environment</small>
-          <span>${dog.compatibility[0] || "Flexible"}</span>
-        </div>
-        <div class="quick-stat-box">
-          <small>Weight</small>
-          <span>${dog.weight}</span>
-        </div>
-        <div class="quick-stat-box">
-          <small>Adoption Fee</small>
-          <span>$150 (Includes Kit)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Column: Adoption Application -->
-    <div class="modal-col-right" id="modal-form-col">
-      <div class="adopt-form-header">
-        <span class="section-tag"><i data-lucide="file-check-2" class="icon-xs"></i> Fast-Track Adoption</span>
-        <h3>Express Interest in ${dog.name}</h3>
-        <p>Complete this quick questionnaire to schedule your private meet-and-greet.</p>
-      </div>
-
-      <form class="adoption-form" onsubmit="handleAdoptionSubmit(event, '${dog.name}')">
-        <div class="form-row-2">
-          <div class="form-group">
-            <label for="adopt-first-name">First Name *</label>
-            <input type="text" id="adopt-first-name" required placeholder="Jane">
-          </div>
-          <div class="form-group">
-            <label for="adopt-last-name">Last Name *</label>
-            <input type="text" id="adopt-last-name" required placeholder="Doe">
-          </div>
-        </div>
-
-        <div class="form-row-2">
-          <div class="form-group">
-            <label for="adopt-email">Email Address *</label>
-            <input type="email" id="adopt-email" required placeholder="jane@example.com">
-          </div>
-          <div class="form-group">
-            <label for="adopt-phone">Phone Number *</label>
-            <input type="tel" id="adopt-phone" required placeholder="(555) 000-1234">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="adopt-home-type">Your Living Space *</label>
-          <select id="adopt-home-type" required>
-            <option value="">Select living space type...</option>
-            <option value="apartment">Apartment / Flat (No Yard)</option>
-            <option value="condo">Condo / Townhouse (Patio)</option>
-            <option value="house_yard">Single Family Home with Fenced Yard</option>
-            <option value="rural">Rural Property / Farm</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="adopt-experience">Prior Dog Ownership Experience *</label>
-          <select id="adopt-experience" required>
-            <option value="first_timer">First-time dog guardian</option>
-            <option value="experienced">Have cared for dogs before</option>
-            <option value="current_owner">Currently have pets at home</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="adopt-notes">Why would ${dog.name} be a great fit for you? (Optional)</label>
-          <textarea id="adopt-notes" rows="2" placeholder="Tell us about your daily routine, favorite parks, or family members..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-full mt-4">
-          <i data-lucide="send" class="icon-sm"></i>
-          <span>Submit Adoption Application</span>
-        </button>
-      </form>
-    </div>
-  `;
-
-  dogModalOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
-  initLucide();
-};
-
-window.closeDogModal = function() {
-  dogModalOverlay.classList.remove("active");
-  document.body.style.overflow = "";
-};
-
-window.handleModalOverlayClick = function(e) {
-  if (e.target === dogModalOverlay) {
-    closeDogModal();
-  }
-};
-
-window.handleAdoptionSubmit = function(event, dogName) {
-  event.preventDefault();
-
-  // Trigger celebration confetti
-  if (window.confetti) {
-    window.confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  }
-
-  const reservationCode = "BARK-" + Math.floor(1000 + Math.random() * 9000) + "-PAW";
-  const modalFormCol = document.getElementById("modal-form-col");
-
-  modalFormCol.innerHTML = `
-    <div class="modal-success-state">
-      <div class="success-icon-burst">
-        <i data-lucide="check-check" class="icon-lg"></i>
-      </div>
-      <h3>Application Received!</h3>
-      <p>Thank you! Your adoption application for <strong>${dogName}</strong> has been submitted to our canine placement coordinators.</p>
-      
-      <div class="adoption-code-badge">
-        Reference Code: ${reservationCode}
-      </div>
-
-      <p style="font-size: 0.85rem; color: var(--text-secondary);">
-        Our adoption team will review your application and contact you within 24 hours to schedule an in-person or virtual meet & greet!
-      </p>
-
-      <button class="btn btn-primary mt-4" onclick="closeDogModal()">
-        <span>Back to Browse Dogs</span>
-      </button>
-    </div>
-  `;
-
-  initLucide();
-  showToast(`Application submitted for ${dogName}! Check your email shortly.`, "success");
-};
-
-// Breed Matchmaker Quiz Logic
-window.selectQuizAnswer = function(step, val) {
-  if (step === 1) {
-    quizAnswers.environment = val;
-    document.getElementById("quiz-step-1").style.display = "none";
-    document.getElementById("quiz-step-2").style.display = "block";
-    document.getElementById("quiz-progress").style.width = "66%";
-    document.getElementById("quiz-step-indicator").textContent = "Question 2 of 3";
-  } else if (step === 2) {
-    quizAnswers.activity = val;
-    document.getElementById("quiz-step-2").style.display = "none";
-    document.getElementById("quiz-step-3").style.display = "block";
-    document.getElementById("quiz-progress").style.width = "100%";
-    document.getElementById("quiz-step-indicator").textContent = "Question 3 of 3";
-  } else if (step === 3) {
-    quizAnswers.experience = val;
-    document.getElementById("quiz-step-3").style.display = "none";
-    document.getElementById("quiz-step-indicator").style.display = "none";
-    showQuizResults();
-  }
-  initLucide();
-};
-
-function showQuizResults() {
-  const resultCard = document.getElementById("quiz-result");
-  const matchesGrid = document.getElementById("quiz-matches-grid");
-  resultCard.style.display = "block";
-
-  // Match scoring logic
-  let matches = DOGS_DATA.map(dog => {
-    let score = 70;
-    if (quizAnswers.environment === "apartment" && dog.categories.includes("apartment")) score += 20;
-    if (quizAnswers.environment === "house_yard" && (dog.categories.includes("family") || dog.categories.includes("active"))) score += 20;
-    if (quizAnswers.environment === "farm_country" && dog.categories.includes("active")) score += 25;
-
-    if (quizAnswers.activity === "chill" && dog.energyScore <= 50) score += 15;
-    if (quizAnswers.activity === "moderate" && dog.energyScore >= 50 && dog.energyScore <= 80) score += 15;
-    if (quizAnswers.activity === "athlete" && dog.energyScore > 75) score += 20;
-
-    score = Math.min(99, score + Math.floor(Math.random() * 5));
-    return { ...dog, matchScore: score };
-  });
-
-  matches.sort((a, b) => b.matchScore - a.matchScore);
-  const topMatches = matches.slice(0, 2);
-
-  matchesGrid.innerHTML = topMatches.map(dog => `
-    <div class="dog-card">
-      <div class="dog-card-img-wrap">
-        <img src="${dog.image}" alt="${dog.name}" class="dog-card-img">
-        <span class="card-badge available" style="background: rgba(16, 185, 129, 0.95); font-weight:800;">
-          ${dog.matchScore}% Match
-        </span>
-      </div>
-      <div class="dog-card-body">
-        <div class="card-title-row">
-          <h3 class="card-dog-name">${dog.name}</h3>
-          <span class="gender-pill ${dog.gender.toLowerCase()}">${dog.gender}</span>
-        </div>
-        <div class="card-dog-breed">${dog.breed} • ${dog.ageLabel}</div>
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-          ${dog.description.substring(0, 95)}...
-        </p>
-        <button class="btn btn-primary w-full" onclick="openDogModal(${dog.id})">
-          Meet ${dog.name}
-        </button>
-      </div>
+  const specsList = Object.entries(prod.specs || {}).map(([key, val]) => `
+    <div class="modal-spec-item">
+      <small>${key}</small>
+      <strong>${val}</strong>
     </div>
   `).join("");
 
-  initLucide();
-}
+  const directWhatsAppMsg = encodeURIComponent(
+    `Hello Fish & Pets Paradise! I want to buy *${prod.name}* (Price: ₹${prod.price}). Is this currently in stock for local delivery?`
+  );
 
-window.restartQuiz = function() {
-  quizAnswers = { environment: null, activity: null, experience: null };
-  document.getElementById("quiz-result").style.display = "none";
-  document.getElementById("quiz-step-1").style.display = "block";
-  document.getElementById("quiz-step-2").style.display = "none";
-  document.getElementById("quiz-step-3").style.display = "none";
-  document.getElementById("quiz-progress").style.width = "33%";
-  const indicator = document.getElementById("quiz-step-indicator");
-  indicator.style.display = "block";
-  indicator.textContent = "Question 1 of 3";
+  modalContentContainer.innerHTML = `
+    <!-- Left Column: Product Visual & Specs -->
+    <div class="modal-col-left">
+      <div class="modal-img-wrap">
+        <img src="${prod.image}" alt="${prod.name}" onerror="this.onerror=null; this.src='assets/images/hero_dog.jpg';">
+      </div>
+
+      <div class="modal-badges-row">
+        <span class="product-badge ${prod.badgeType}">${prod.badge}</span>
+        <span class="tag-badge"><i data-lucide="shield-check" class="icon-xs text-success"></i> 100% Genuine</span>
+      </div>
+
+      <h2 class="modal-product-title">${prod.name}</h2>
+      <div class="modal-product-meta">Brand: <strong>${prod.brand}</strong> • Category: <strong>${prod.category.replace('_', ' ').toUpperCase()}</strong></div>
+
+      <p class="modal-bio-text">${prod.fullDesc}</p>
+
+      <div class="modal-specs-grid">
+        ${specsList}
+      </div>
+    </div>
+
+    <!-- Right Column: Pricing & Quick Purchase -->
+    <div class="modal-col-right" id="modal-form-col">
+      <div class="product-buy-box">
+        <div class="modal-price-card">
+          <div class="price-header-row">
+            <span class="modal-current-price">₹${prod.price.toLocaleString()}</span>
+            ${prod.originalPrice ? `<span class="modal-original-price">₹${prod.originalPrice.toLocaleString()}</span>` : ''}
+            ${prod.discount ? `<span class="discount-pill">${prod.discount}</span>` : ''}
+          </div>
+          <p class="modal-inclusive-tax"><i data-lucide="check" class="icon-xs text-success"></i> Inclusive of all taxes • Ready for immediate local dispatch</p>
+        </div>
+
+        <div class="modal-actions-container">
+          <button class="btn btn-primary w-full btn-lg-action" onclick="addToCart(${prod.id}); closeProductModal(); openCartDrawer();">
+            <i data-lucide="shopping-cart" class="icon-sm"></i>
+            <span>Add to Cart & Checkout</span>
+          </button>
+
+          <a href="https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${directWhatsAppMsg}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp w-full btn-lg-action mt-3">
+            <i data-lucide="message-circle" class="icon-sm"></i>
+            <span>Order Instantly on WhatsApp</span>
+          </a>
+
+          <a href="https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=Hello%20Harman%20ji!%20I%20have%20a%20question%20regarding%20${encodeURIComponent(prod.name)}." target="_blank" rel="noopener noreferrer" class="btn btn-secondary w-full mt-2">
+            <i data-lucide="help-circle" class="icon-xs"></i>
+            <span>Ask Consultant About This Product</span>
+          </a>
+        </div>
+
+        <div class="modal-trust-points">
+          <div class="m-trust-item">
+            <i data-lucide="truck" class="icon-xs text-primary"></i>
+            <span>Same-Day Local Delivery in Jalandhar</span>
+          </div>
+          <div class="m-trust-item">
+            <i data-lucide="award" class="icon-xs text-primary"></i>
+            <span>Authentic Sealed Product Guarantee</span>
+          </div>
+          <div class="m-trust-item">
+            <i data-lucide="headphones" class="icon-xs text-primary"></i>
+            <span>Free 24/7 Pet Feeding Guidance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if (productModalOverlay) {
+    productModalOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
   initLucide();
 };
 
-// Care Tabs
+window.closeProductModal = function() {
+  if (productModalOverlay) {
+    productModalOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+};
+
+window.handleModalOverlayClick = function(e) {
+  if (e.target === productModalOverlay) {
+    closeProductModal();
+  }
+};
+
+// Pet Care Knowledge Tabs Switcher
 window.switchCareTab = function(tabId) {
-  const tabs = ["nutrition", "training", "health", "checklist"];
+  const tabs = ["nutrition", "puppy", "health", "checklist"];
   const navBtns = document.querySelectorAll(".care-nav-btn");
 
-  tabs.forEach((id, index) => {
+  tabs.forEach(id => {
     const el = document.getElementById(`care-tab-${id}`);
     if (el) {
       el.style.display = (id === tabId) ? "block" : "none";
@@ -767,20 +1020,10 @@ window.switchCareTab = function(tabId) {
 
   navBtns.forEach(btn => {
     btn.classList.remove("active");
-    if (btn.getAttribute("onclick").includes(tabId)) {
+    if (btn.getAttribute("onclick") && btn.getAttribute("onclick").includes(tabId)) {
       btn.classList.add("active");
     }
   });
-};
-
-// Newsletter Handler
-window.handleNewsletter = function(e) {
-  e.preventDefault();
-  const input = document.getElementById("newsletter-email");
-  if (input && input.value) {
-    showToast("🎉 You're subscribed to BarkHaven weekly pet updates!", "success");
-    input.value = "";
-  }
 };
 
 // Theme Toggling
@@ -788,7 +1031,7 @@ function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
   const newTheme = currentTheme === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", newTheme);
-  localStorage.setItem("barkhaven_theme", newTheme);
+  localStorage.setItem("petparadise_theme", newTheme);
   updateThemeIcon(newTheme);
   showToast(`Switched to ${newTheme === "dark" ? "Dark 🌙" : "Light ☀️"} mode`);
 }
@@ -827,22 +1070,23 @@ function showToast(message, type = "info") {
   }, 3200);
 }
 
-// Fluid Typewriter Effect for Hero Headline
+// Fluid Typewriter Headline Effect
 function initTypewriter() {
   const target = document.getElementById("typewriter-text");
   if (!target) return;
 
   const phrases = [
-    "Furry Best Friend.",
-    "Loyal Adventure Partner.",
-    "Cuddle Champion.",
-    "Four-Legged Soulmate."
+    "24/7 Free Pet Consultation.",
+    "Premium Dog & Cat Nutrition.",
+    "Authentic Pet Medicines.",
+    "Grooming & Hygiene Care.",
+    "Toys, Clothes & Accessories."
   ];
 
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let typingSpeed = 80;
+  let typingSpeed = 75;
 
   function typeStep() {
     const currentPhrase = phrases[phraseIndex];
@@ -850,29 +1094,24 @@ function initTypewriter() {
     if (isDeleting) {
       target.textContent = currentPhrase.substring(0, charIndex - 1);
       charIndex--;
-      typingSpeed = 40; // Quick smooth backspace
+      typingSpeed = 35;
     } else {
       target.textContent = currentPhrase.substring(0, charIndex + 1);
       charIndex++;
-      // Subtle human timing variation
-      typingSpeed = 70 + Math.random() * 30;
+      typingSpeed = 65 + Math.random() * 25;
     }
 
     if (!isDeleting && charIndex === currentPhrase.length) {
-      // Pause at complete phrase
-      typingSpeed = 2400;
+      typingSpeed = 2200;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
-      // Move to next phrase
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      typingSpeed = 450;
+      typingSpeed = 400;
     }
 
     setTimeout(typeStep, typingSpeed);
   }
 
-  // Smooth entry delay
-  setTimeout(typeStep, 400);
+  setTimeout(typeStep, 350);
 }
-
