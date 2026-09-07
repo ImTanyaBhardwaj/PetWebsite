@@ -9,6 +9,31 @@ const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE_NUMBER}`;
 // Realistic Pet Shop Products Dataset
 const PRODUCTS_DATA = [
   {
+    id: 101,
+    name: "Canine Creek Life Preservation Formula Grain Free Dog Food (4 Kg)",
+    category: "dog_food",
+    petType: "dog",
+    brand: "Canine Creek",
+    price: 2250,
+    originalPrice: 2500,
+    discount: "10% OFF",
+    rating: 4.9,
+    reviewsCount: 156,
+    badge: "Grain Free",
+    badgeType: "hot",
+    image: "assets/images/canine_creek_4kg.jpg",
+    shortDesc: "Advanced pet nutrition with real chicken & egg, grain-free Life Preservation formula for healthy growth & vitality.",
+    fullDesc: "Canine Creek Life Preservation Formula is an ultra-premium grain-free dog food crafted with real chicken and egg as the #1 ingredient. Enriched with cold-formed Life Preservation kibble, DHA for brain health, essential vitamins, and minerals to bolster immunity, promote healthy joints, and ensure superior digestion.",
+    specs: {
+      "Weight": "4 kg",
+      "MRP": "₹2,250",
+      "Formula": "Life Preservation Formula (Grain Free)",
+      "Key Ingredients": "Real Chicken & Egg (#1 Ingredient)",
+      "Life Stage": "Puppy & Adult (All Breeds)"
+    },
+    inStock: true
+  },
+  {
     id: 1,
     name: "Royal Canin Maxi Adult Dog Food",
     category: "dog_food",
