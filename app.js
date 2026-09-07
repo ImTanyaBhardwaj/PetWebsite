@@ -34,6 +34,31 @@ const PRODUCTS_DATA = [
     inStock: true
   },
   {
+    id: 102,
+    name: "Pedigree PROCARE Adult Small Breeds Dog Food (3 Kg)",
+    category: "dog_food",
+    petType: "dog",
+    brand: "Pedigree",
+    price: 1200,
+    originalPrice: 1399,
+    discount: "14% OFF",
+    rating: 4.8,
+    reviewsCount: 138,
+    badge: "Immune Support",
+    badgeType: "deal",
+    image: "assets/images/pedigree_procare_3kg.jpg",
+    shortDesc: "Specialized formula for small breed adult dogs with lifelong immune health and dental defense.",
+    fullDesc: "Pedigree PROCARE Adult Small Breeds (9 months onwards) is developed with veterinary nutritionists at Waltham Petcare Science Institute. Fortified with 20% protein, active dental defense, zinc and omega fatty acids for a glossy coat, and antioxidants to strengthen immune resistance.",
+    specs: {
+      "Weight": "3 kg",
+      "MRP": "₹1,200",
+      "Protein": "20% Protein Content",
+      "Target Breed": "Small Breeds (Pomeranian, Shih Tzu, Pug, etc.)",
+      "Life Stage": "Adult (9+ Months)"
+    },
+    inStock: true
+  },
+  {
     id: 1,
     name: "Royal Canin Maxi Adult Dog Food",
     category: "dog_food",
